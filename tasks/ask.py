@@ -1,18 +1,13 @@
 from telegram.ext import Updater
-from config import PORT, TOKEN, APP_NAME, USERS
+from config import TOKEN, USERS
+from texts import HELLO_MESSAGE
 
 
 def main():
-    """Start the bot."""
     updater = Updater(TOKEN, use_context=True)
-    # updater.start_webhook(listen="0.0.0.0",
-    #                       port=PORT,
-    #                       url_path=TOKEN)
-    # updater.bot.set_webhook(f"https://{APP_NAME}.herokuapp.com/" + TOKEN)
-
     for user in USERS:
         updater.bot.send_message(chat_id=user,
-                                 text='Приветик')
+                                 text=HELLO_MESSAGE)
 
 
 if __name__ == '__main__':

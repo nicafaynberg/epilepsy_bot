@@ -4,6 +4,7 @@ from telegram import ReplyKeyboardMarkup
 from telegram.ext import CommandHandler, MessageHandler, Filters, ConversationHandler
 
 from spreadsheet import sheet
+from texts import HELLO_MESSAGE
 
 users = []  # users of bot
 row = []
@@ -17,7 +18,7 @@ SMALL_SEIZURE, BIG_SEIZURE, MOOD, ASK_WEATHER, BEHAVIOR, WAS_NISE, WAS_SOLPADEIN
 
 def hello(update, context):
     users.append(update.effective_user.id)
-    update.message.reply_text("Ира, привет! Был ли у Илюши сегодня маленький приступ?")
+    update.message.reply_text(HELLO_MESSAGE)
     return SMALL_SEIZURE
 
 
