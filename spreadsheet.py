@@ -6,8 +6,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from config import GOOGLE_CREDENTIALS
 
 scope = ['https://www.googleapis.com/auth/spreadsheets']
-credentials = json.loads(GOOGLE_CREDENTIALS)
-creds = ServiceAccountCredentials.from_json_keyfile_dict(credentials, scope)
+creds = ServiceAccountCredentials.from_json_keyfile_dict(GOOGLE_CREDENTIALS, scope)
 client = gspread.authorize(creds)
 link = "https://docs.google.com/spreadsheets/d/1llFFWnE3XV8TZrX39VUNihkXZwjwQId95j7w0Qb1bRs/edit?usp=sharing"
 # Find a workbook by name and open the first sheet
