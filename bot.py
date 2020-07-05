@@ -5,8 +5,8 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from dotenv import load_dotenv
 load_dotenv()
 
-APP_NAME = os.getenv("APP_NAME")
 TOKEN = os.getenv("TOKEN")
+APP_NAME = os.getenv("APP_NAME")
 PORT = int(os.environ.get('PORT', '8443'))
 
 # Enable logging
@@ -50,12 +50,11 @@ def main():
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
 
-    # Start the Bot
-    updater.start_polling()
-
-    # Run the bot until you press Ctrl-C or the process receives SIGINT,
-    # SIGTERM or SIGABRT. This should be used most of the time, since
-    # start_polling() is non-blocking and will stop the bot gracefully.
+    # add handlers
+    updater.start_webhook(listen="0.0.0.0",
+                          port=PORT,
+                          url_path=TOKEN)
+    updater.bot.set_webhook(f"https://{APP_NAME}.herokuapp.com/" + TOKEN)
     updater.idle()
 
 
