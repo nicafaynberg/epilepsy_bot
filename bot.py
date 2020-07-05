@@ -1,16 +1,9 @@
-import os
 import logging
 from telegram.ext import Updater
 
-from dotenv import load_dotenv
-
+from config import PORT, TOKEN, APP_NAME
 from dialuge_structure import conversation
 
-load_dotenv()
-
-TOKEN = os.getenv("TOKEN")
-APP_NAME = os.getenv("APP_NAME")
-PORT = int(os.environ.get('PORT', '8443'))
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
