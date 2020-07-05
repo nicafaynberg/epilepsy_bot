@@ -39,6 +39,10 @@ def main():
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
     updater = Updater(TOKEN, use_context=True)
+    updater.start_webhook(listen="0.0.0.0",
+                          port=PORT,
+                          url_path=TOKEN)
+    updater.bot.set_webhook(f"https://{APP_NAME}.herokuapp.com/" + TOKEN)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
@@ -50,11 +54,6 @@ def main():
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
 
-    # add handlers
-    updater.start_webhook(listen="0.0.0.0",
-                          port=PORT,
-                          url_path=TOKEN)
-    updater.bot.set_webhook(f"https://{APP_NAME}.herokuapp.com/" + TOKEN)
     updater.idle()
 
 
