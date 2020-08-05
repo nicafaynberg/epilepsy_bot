@@ -102,10 +102,11 @@ def save_and_goodbye(update, context):
 def additions(update, context):
     row.append(update.message.text)
     update.message.reply_text("Давай, записываю.")
-    return ConversationHandler.END
+    return ADDITIONAL
+
 
 conversation = ConversationHandler(
-    entry_points=[CommandHandler("start", hello), MessageHandler(Filters.text, reply_to_first)],
+    entry_points=[CommandHandler("start", hello), MessageHandler(Filters.regex("^(Да, был)$"), MessageHandler(Filters.regex("^(Нет, не было)$"), reply_to_first)],
     states={
         SMALL_SEIZURE: [CommandHandler("start", hello), MessageHandler(Filters.text, reply_to_first)],
         BIG_SEIZURE: [MessageHandler(Filters.text, reply_to_second)],
