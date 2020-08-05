@@ -106,7 +106,7 @@ def additions(update, context):
 
 
 conversation = ConversationHandler(
-    entry_points=[CommandHandler("start", hello), MessageHandler(Filters.regex("^(Да, был)$"), MessageHandler(Filters.regex("^(Нет, не было)$"), reply_to_first)],
+    entry_points=[CommandHandler("start", hello), MessageHandler(Filters.regex("^(Да, был)$"), reply_to_first), MessageHandler(Filters.regex("^(Нет, не было)$"), reply_to_first)],
     states={
         SMALL_SEIZURE: [CommandHandler("start", hello), MessageHandler(Filters.text, reply_to_first)],
         BIG_SEIZURE: [MessageHandler(Filters.text, reply_to_second)],
