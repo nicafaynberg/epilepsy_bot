@@ -15,7 +15,6 @@ SMALL_SEIZURE, BIG_SEIZURE, MOOD, ASK_WEATHER, BEHAVIOR, WAS_NISE, WAS_SOLPADEIN
     11
 )
 
-
 def hello(update, context):
     users.append(update.effective_user.id)
     update.message.reply_text(HELLO_MESSAGE)
@@ -92,25 +91,21 @@ def goodbye(update, context):
     del row[:]
     return SMALL_SEIZURE
 
-
 def save_and_goodbye(update, context):
     row.append(update.message.text)
     return goodbye(update, context)
-
 
 #   row.append(update.message.text)
 #   update.message.reply_text('Спасибо за ответы! В любой момент их можно дополнить, просто написав сюда')
 #   return FEEDBACK
 
-
 def additions(update, context):
     row.append(update.message.text)
     update.message.reply_text("Давай, записываю.")
-    return ADDITIONAL
-
+    return ConversationHandler.END
 
 conversation = ConversationHandler(
-    entry_points=[CommandHandler("start", hello)],
+    entry_points=[CommandHandler("start", hello), MessageHandler(Filters.text, reply_to_first)],
     states={
         SMALL_SEIZURE: [CommandHandler("start", hello), MessageHandler(Filters.text, reply_to_first)],
         BIG_SEIZURE: [MessageHandler(Filters.text, reply_to_second)],
