@@ -9,7 +9,6 @@ from texts import HELLO_MESSAGE
 users = []  # users of bot
 row = []
 
-row.append(dt.strftime(dt.now(), "%d.%m.%Y. %H:%M"))
 
 SMALL_SEIZURE, BIG_SEIZURE, MOOD, ASK_WEATHER, BEHAVIOR, WAS_NISE, WAS_SOLPADEIN, WAS_ANALGIN, WAS_NOSHPA, FEEDBACK, ADDITIONAL = range(
     11
@@ -22,7 +21,8 @@ def hello(update, context):
 
 
 def reply_to_first(update, context):
-    row.append(update.message.text)
+    global row
+    row = [dt.strftime(dt.now(), "%d.%m.%Y. %H:%M"), update.message.text]
     update.message.reply_text("Был ли большой приступ?")
     return BIG_SEIZURE
 
