@@ -24,7 +24,9 @@ def reply_to_first(update, context):
     reply_keyboard = [["Да", "Нет"]]
     global row
     row = [dt.strftime(dt.now(), "%d.%m.%Y. %H:%M"), update.message.text]
-    update.message.reply_text("Был ли большой приступ?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+    update.message.reply_text(
+        "Был ли большой приступ?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
+    )
     return BIG_SEIZURE
 
 
@@ -39,7 +41,6 @@ def reply_to_third(update, context):
     update.message.reply_text("Какая сегодня была погода?")
     return ASK_WEATHER
 
-
 # def reply_to_fourth(update, context):
 #     row.append(update.message.text)
 #     update.message.reply_text("Какое было поведение у Илюши?")
@@ -53,7 +54,6 @@ def nise(update, context):
         "Сегодня давали Найз?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
     )
     return WAS_NISE
-
 
 def solpadein(update, context):
     reply_keyboard = [["Да", "Нет"]]
@@ -110,7 +110,12 @@ conversation = ConversationHandler(
     entry_points=[CommandHandler("start", hello), MessageHandler(Filters.regex("^(Да, был)$"), reply_to_first), MessageHandler(Filters.regex("^(Нет, не было)$"), reply_to_first)],
     states={
         SMALL_SEIZURE: [CommandHandler("start", hello), MessageHandler(Filters.text, reply_to_first)],
-        BIG_SEIZURE: [MessageHandler(Filters.regex("^(Да, был)$"), reply_to_second), MessageHandler(Filters.regex("^(Нет, не было)$"), reply_to_second)],
+        # BIG_SEIZURE: [MessageHandler(Filters.regex("^(Да, был)$"), reply_to_second), MessageHandler(Filters.regex("^(Нет, не было)$"), reply_to_second)],
+        BIG_SEIZURE: [
+            CommandHandler("start", hello),
+            MessageHandler(Filters.regex("^(Да)$"), reply_to_second()),
+            MessageHandler(Filters.regex("^(Нет)$"), reply_to_second()),
+        ],
         MOOD: [MessageHandler(Filters.text, reply_to_third)],
         ASK_WEATHER: [MessageHandler(Filters.text, nise)],
         # BEHAVIOR: [MessageHandler(Filters.text, nise)],
