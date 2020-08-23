@@ -10,8 +10,8 @@ users = []  # users of bot
 row = []
 
 
-SMALL_SEIZURE, BIG_SEIZURE, MOOD, ASK_WEATHER, BEHAVIOR, WAS_NISE, WAS_SOLPADEIN, WAS_ANALGIN, WAS_NOSHPA, FEEDBACK, ADDITIONAL = range(
-    11
+SMALL_SEIZURE, BIG_SEIZURE, MOOD, ASK_WEATHER, WAS_NISE, WAS_SOLPADEIN, WAS_ANALGIN, WAS_NOSHPA, FEEDBACK, ADDITIONAL = range(
+    10
 )
 
 def hello(update, context):
@@ -21,15 +21,16 @@ def hello(update, context):
 
 
 def reply_to_first(update, context):
+    reply_keyboard = [["Да", "Нет"]]
     global row
     row = [dt.strftime(dt.now(), "%d.%m.%Y. %H:%M"), update.message.text]
-    update.message.reply_text("Был ли большой приступ?")
+    update.message.reply_text("Был ли большой приступ?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
     return BIG_SEIZURE
 
 
 def reply_to_second(update, context):
     row.append(update.message.text)
-    update.message.reply_text("Какое у Илюши было настроение, общее состояние?")
+    update.message.reply_text("Какое у Илюши было настроение, общее состояние, поведение?")
     return MOOD
 
 
@@ -39,10 +40,10 @@ def reply_to_third(update, context):
     return ASK_WEATHER
 
 
-def reply_to_fourth(update, context):
-    row.append(update.message.text)
-    update.message.reply_text("Какое было поведение у Илюши?")
-    return BEHAVIOR
+# def reply_to_fourth(update, context):
+#     row.append(update.message.text)
+#     update.message.reply_text("Какое было поведение у Илюши?")
+#     return BEHAVIOR
 
 
 def nise(update, context):
