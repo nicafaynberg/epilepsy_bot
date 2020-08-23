@@ -112,8 +112,8 @@ conversation = ConversationHandler(
         SMALL_SEIZURE: [CommandHandler("start", hello), MessageHandler(Filters.text, reply_to_first)],
         # BIG_SEIZURE: [MessageHandler(Filters.regex("^(Да, был)$"), reply_to_second), MessageHandler(Filters.regex("^(Нет, не было)$"), reply_to_second)],
         BIG_SEIZURE: [
-            MessageHandler(Filters.regex("^(Да)$"), reply_to_second()),
-            MessageHandler(Filters.regex("^(Нет)$"), reply_to_second()),
+            MessageHandler(Filters.regex("^(Да)$"), reply_to_second),
+            MessageHandler(Filters.regex("^(Нет)$"), reply_to_second),
         ],
         MOOD: [MessageHandler(Filters.text, reply_to_third)],
         ASK_WEATHER: [MessageHandler(Filters.text, nise)],
