@@ -112,8 +112,8 @@ conversation = ConversationHandler(
         SMALL_SEIZURE: [CommandHandler("start", hello), MessageHandler(Filters.text, reply_to_first)],
         BIG_SEIZURE: [MessageHandler(Filters.text, reply_to_second)],
         MOOD: [MessageHandler(Filters.text, reply_to_third)],
-        ASK_WEATHER: [MessageHandler(Filters.text, reply_to_fourth)],
-        BEHAVIOR: [MessageHandler(Filters.text, nise)],
+        ASK_WEATHER: [MessageHandler(Filters.text, nise)],
+        # BEHAVIOR: [MessageHandler(Filters.text, nise)],
         WAS_NISE: [
             CommandHandler("start", hello),
             MessageHandler(Filters.regex("^(Да)$"), solpadein),
