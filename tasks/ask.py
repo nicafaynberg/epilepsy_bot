@@ -7,9 +7,9 @@ from texts import HELLO_MESSAGE
 def main():
     updater = Updater(TOKEN, use_context=True)
     for user in USERS:
-        reply_keyboard = [["Да, был", "Нет, не было"]]
+        # reply_keyboard = [["Да, был", "Нет, не было"]]
         updater.bot.send_message(chat_id=user,
-                                 text=HELLO_MESSAGE, reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+                                 text=HELLO_MESSAGE)
 
 
 
